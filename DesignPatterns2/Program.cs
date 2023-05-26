@@ -1,5 +1,6 @@
 ﻿using DesignPatterns2.Cap1;
 using DesignPatterns2.Cap2;
+using DesignPatterns2.Cap3;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,21 +15,26 @@ namespace DesignPatterns2
     {
         static void Main(string[] args)
         {
-            NotasMusicais notas = new NotasMusicais();
+            Historico historico = new Historico();
 
-            IList<INota> musica = new List<INota>()
-            {
-                notas.Pega("do"), notas.Pega("re"), notas.Pega("mi"), notas.Pega("fa"), notas.Pega("fa"), notas.Pega("fa"),
-                notas.Pega("do"), notas.Pega("re"), notas.Pega("do"), notas.Pega("re"), notas.Pega("re"), notas.Pega("re"),
-                notas.Pega("do"), notas.Pega("sol"), notas.Pega("fa"), notas.Pega("mi"), notas.Pega("mi"), notas.Pega("mi"),
-                notas.Pega("do"), notas.Pega("re"), notas.Pega("mi"), notas.Pega("fa"), notas.Pega("fa"), notas.Pega("fa")
-            };
+            Contrato contrato = new Contrato(DateTime.Now, "Lucas", TipoContrato.Novo);
+            historico.Adiciona(contrato.SalvaEstado());
 
-            Piano piano = new Piano();
+            Console.WriteLine(contrato.Tipo);
 
-            piano.Toca(musica);
+            contrato.Avanca();
+            historico.Adiciona(contrato.SalvaEstado());
 
-            Console.ReadLine();
+            Console.WriteLine(contrato.Tipo);
+
+            contrato.Avanca();
+            historico.Adiciona(contrato.SalvaEstado());
+
+            Console.WriteLine(contrato.Tipo);
+
+            Console.WriteLine(historico.Pega(0).Contrato.Tipo);
+            Console.WriteLine(historico.Pega(1).Contrato.Tipo);
+            Console.WriteLine(historico.Pega(2).Contrato.Tipo);
         }
     }
 }
