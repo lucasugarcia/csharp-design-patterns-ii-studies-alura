@@ -1,6 +1,7 @@
 ﻿using DesignPatterns2.Cap1;
 using DesignPatterns2.Cap2;
 using DesignPatterns2.Cap3;
+using DesignPatterns2.Cap4;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,26 +16,12 @@ namespace DesignPatterns2
     {
         static void Main(string[] args)
         {
-            Historico historico = new Historico();
+            var esquerda = new Soma(new Numero(1), new Numero(10));
+            var direita = new Subtracao(new Numero(20), new Numero(10));
 
-            Contrato contrato = new Contrato(DateTime.Now, "Lucas", TipoContrato.Novo);
-            historico.Adiciona(contrato.SalvaEstado());
+            var soma = new Soma(esquerda, direita);
 
-            Console.WriteLine(contrato.Tipo);
-
-            contrato.Avanca();
-            historico.Adiciona(contrato.SalvaEstado());
-
-            Console.WriteLine(contrato.Tipo);
-
-            contrato.Avanca();
-            historico.Adiciona(contrato.SalvaEstado());
-
-            Console.WriteLine(contrato.Tipo);
-
-            Console.WriteLine(historico.Pega(0).Contrato.Tipo);
-            Console.WriteLine(historico.Pega(1).Contrato.Tipo);
-            Console.WriteLine(historico.Pega(2).Contrato.Tipo);
+            Console.WriteLine(soma.Avalia());
         }
     }
 }
