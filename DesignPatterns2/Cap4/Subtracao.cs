@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DesignPatterns2.Cap5;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,8 @@ namespace DesignPatterns2.Cap4
 {
     class Subtracao : IExpressao
     {
-        public IExpressao Esquerda { get; }
-        public IExpressao Direita { get; }
+        public IExpressao Esquerda { get; private set; }
+        public IExpressao Direita { get; private set; }
 
         public Subtracao(IExpressao esquerda, IExpressao direita)
         {
@@ -20,6 +21,11 @@ namespace DesignPatterns2.Cap4
         public int Avalia()
         {
             return Esquerda.Avalia() - Direita.Avalia();
+        }
+
+        public void Aceita(Impressora impressora)
+        {
+            impressora.ImprimeSubtracao(this);
         }
     }
 }

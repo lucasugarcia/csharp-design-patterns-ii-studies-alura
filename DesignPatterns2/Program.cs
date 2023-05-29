@@ -2,6 +2,7 @@
 using DesignPatterns2.Cap2;
 using DesignPatterns2.Cap3;
 using DesignPatterns2.Cap4;
+using DesignPatterns2.Cap5;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -22,6 +23,9 @@ namespace DesignPatterns2
             var soma = new Soma(esquerda, direita);
 
             Console.WriteLine(soma.Avalia());
+
+            Impressora impressora = new Impressora();
+            soma.Aceita(impressora);
         }
     }
 }
