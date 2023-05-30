@@ -3,6 +3,7 @@ using DesignPatterns2.Cap2;
 using DesignPatterns2.Cap3;
 using DesignPatterns2.Cap4;
 using DesignPatterns2.Cap5;
+using DesignPatterns2.Cap6;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,15 +18,31 @@ namespace DesignPatterns2
     {
         static void Main(string[] args)
         {
-            var esquerda = new Soma(new Numero(1), new Numero(10));
-            var direita = new Subtracao(new Numero(20), new Numero(10));
+            IMensagem mensagem = new MensagemAdministrativa("Lucas");
+            IEnviador enviador = new EnviaPorSMS();
+            
+            mensagem.Enviador = enviador;
+            
+            mensagem.Envia();
 
-            var soma = new Soma(esquerda, direita);
+            enviador = new EnviaPorEmail();
 
-            Console.WriteLine(soma.Avalia());
+            mensagem.Enviador = enviador;
 
-            Impressora impressora = new Impressora();
-            soma.Aceita(impressora);
+            mensagem.Envia();
+
+            mensagem = new MensagemCliente("Lucas");
+            enviador = new EnviaPorSMS();
+
+            mensagem.Enviador = enviador;
+
+            mensagem.Envia();
+
+            enviador = new EnviaPorEmail();
+
+            mensagem.Enviador = enviador;
+
+            mensagem.Envia();
         }
     }
 }
